@@ -9,6 +9,9 @@ module.exports = function(req, res) {
   const phone = String(req.body.phone).replace(/[^\d]/g, "") // This is a regular expression that will match any character that is not a digit and replace by empty string.
 
   // Create a new user account using that phone number
+  admin.auth().createUser({ uid: phone })
+    .then(user => res.send(user))
+    .catch(err => res.status(422).send({ err: err }))
 
   // Respond to the user request, saying the account was made
 }
