@@ -23,6 +23,7 @@ module.exports = function(req, res) {
         }, (err) => {
             if (err) { return res.status(422).send(err) }
 
+            // Save code into user model firebase database
             admin.database().ref('users/' + phone)
               .update({ code: code, codeValid: true }, () => {
                   res.send({ success: true })
